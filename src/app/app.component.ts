@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { faBell } from '@fortawesome/free-solid-svg-icons'
+import { AccountService } from './_services/account.service';
+import { User } from './_models/user';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +11,17 @@ import { faBell } from '@fortawesome/free-solid-svg-icons'
 })
 export class AppComponent implements OnInit {
   title: string = 'Tinner !';
-  faBell=faBell
-  users: any
-
-  constructor(private http: HttpClient) { }
-
+  constructor(private accountService: AccountService) { }
+  setCurrentUser() {
+    const userString = localStorage.getItem('user')
+    if (!userString) return
+    const user: User = JSON.parse(userString)
+    this.accountService.setCurrentUser(user)
+  }
   ngOnInit(): void {
-    this.http.get('https://localhost:7777/api/users').subscribe({
-      next: (response) => this.users = response,
-      error: (err) => console.log(err),
-      complete: () => console.log('request completed')
-    })
+    this.setCurrentUser()
   }
 }
+
+
+
