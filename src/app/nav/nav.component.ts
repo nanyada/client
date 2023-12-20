@@ -38,6 +38,8 @@ export class NavComponent implements OnInit {
       error: err => this.toastr.error (err.error)
     })
   }
+
+  
   logout() {
     this.accountService.logout()
     this.router.navigateByUrl('/')

@@ -6,17 +6,24 @@ import { MessagesComponent } from "./messages/messages.component";
 import { NgModule } from "@angular/core";
 import { ListsComponent } from "./lists/lists.component";
 import { authGuard } from "./_guard/auth.guard";
+import { TestErrorComponent } from "./errors/test-error/test-error.component";
+import { NotFoundComponent } from "./errors/not-found/not-found.component";
+import { ServerErrorComponent } from "./errors/server-error/server-error.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
-    path: '', runGuardsAndResolvers:'always',canActivate:[authGuard],children:[
-    { path: 'members', component: MemberListComponent, canActivate: [authGuard] },
-    { path: 'members/:id', component: MemberDetailComponent },
-    { path: 'lists', component: ListsComponent },
-    { path: 'messages', component: MessagesComponent },
-  ]
-},
+    path: '', runGuardsAndResolvers: 'always', canActivate: [authGuard], children: [
+      { path: 'members', component: MemberListComponent, canActivate: [authGuard] },
+      { path: 'members/:id', component: MemberDetailComponent },
+      { path: 'members/name/:username', component: MemberDetailComponent },
+      { path: 'lists', component: ListsComponent },
+      { path: 'messages', component: MessagesComponent },
+    ]
+  },
+  { path: 'errors', component: TestErrorComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: 'server-error', component: ServerErrorComponent },
   { path: '**', component: HomeComponent, pathMatch: 'full' }, // ** = anything not in list
 ]
 
