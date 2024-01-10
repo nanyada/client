@@ -20,7 +20,8 @@
         <div dropdown class="dropdown" *ngIf="currentUser$ | async">
             <a dropdownToggle class="text-decoration-none dropdown-toggle text-light">Hello {{user?.username | titlecase}}</a>
             <div *dropdownMenu="" class="dropdown-menu">
-                <a class="dropdown-item">Profile</a>
+                <a class="dropdown-item" routerLink="member/profile">Profile</a>
+                <!-- <a class="dropdown-item">Profile</a> -->
                 <a class="dropdown-item" (click)="logout()">Logout</a>
             </div>
         </div>
