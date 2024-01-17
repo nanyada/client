@@ -3,8 +3,8 @@ import { faBan, faStar, faTrashCan, faUpload } from '@fortawesome/free-solid-svg
 import { FileUploader } from 'ng2-file-upload';
 import { take } from 'rxjs';
 import { User } from 'src/app/_models/user';
-import { photo } from 'src/app/_modules/Photo';
-import { Member } from 'src/app/_modules/member';
+import { photo } from 'src/app/_models/Photo';
+import { Member } from 'src/app/_models/member';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
 import { environment } from 'src/environments/environment';
