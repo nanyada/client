@@ -13,33 +13,23 @@ import { MembersService } from 'src/app/_services/members.service';
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-
   //members$: Observable<Member[]> | undefined
   members: Member[] = []
   pagination: Pagination | undefined
   userParams: UserParams | undefined 
-  user: User | undefined 
+  //user: User | undefined 
   genderList = [
     { value: 'male', display: 'Male' },
     { value: 'female', display: 'Female' },
     { value: 'non-binary', display: 'Non-binary' },
   ]
   resetFilters() {
-    if (this.user) {
-      this.userParams = new UserParams(this.user)
+      this.userParams = this.memberService.resetUserParams()
       this.loadMember()
-    }
   }
   
   constructor(private accountService: AccountService, private memberService: MembersService) {
-    this.accountService.currentUser$.pipe(take(1)).subscribe({
-      next: user => {
-        if (user) {
-          this.userParams = new UserParams(user)
-          this.user = user
-        }
-      }
-    })
+    this.userParams = this.memberService.getUserParams()
   }
 
   ngOnInit(): void {
@@ -48,6 +38,7 @@ export class MemberListComponent implements OnInit {
 
   loadMember() {
     if (!this.userParams) return 
+    this.memberService.setUserParams(this.userParams)
     this.memberService.getMembers(this.userParams).subscribe({
       next: response => {
         if (response.result && response.pagination) {
@@ -62,6 +53,7 @@ export class MemberListComponent implements OnInit {
     if (!this.userParams) return 
     if (this.userParams.pageNumber === event.page) return 
     this.userParams.pageNumber = event.page 
+    this.memberService.setUserParams(this.userParams)
     this.loadMember()
   }
 }

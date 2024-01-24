@@ -6,6 +6,8 @@ export class UserParams {
     maxAge = 80
     pageNumber = 1
     pageSize = 5
+    orderBy = 'lastActive'
+
 
     constructor(user: User) {
         if (user.gender === 'non-binary')
