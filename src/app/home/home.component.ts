@@ -8,11 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   regisMode = false
-  user: any
 
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
-    this.getUser()
+    // this.getUser()
   }
 
   regisToggle() {
@@ -20,13 +19,13 @@ export class HomeComponent implements OnInit {
   }
 
 
-  private getUser() {
-    this.http.get('https://localhost:7777/api/users').subscribe({
-      next: (response) => this['user'] = response,
-      error: (err) => console.log(err),
-      complete: () => console.log('request completed')
-    });
-  }
+  // private getUser() {
+  //   this.http.get('https://localhost:7777/api/users').subscribe({
+  //     next: (response) => this['user'] = response,
+  //     error: (err) => console.log(err),
+  //     complete: () => console.log('request completed')
+  //   });
+  // }
 
   cancelRegister(event: boolean) {
     this.regisMode = !event
