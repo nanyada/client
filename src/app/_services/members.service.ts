@@ -9,6 +9,7 @@ import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
 import { getPaginationHeaders, getPaginationResult } from './paginationhelper';
 import { ListParams } from '../_models/listParams';
+import { Message } from '../_models/Message';
 
 @Injectable({
   providedIn: 'root'
@@ -117,5 +118,7 @@ getMembers(userParams: UserParams) {
     return getPaginationResult<Member[]>(url, httpParams, this.http).pipe(
     ) //<--
   }
+
+
 
 }
