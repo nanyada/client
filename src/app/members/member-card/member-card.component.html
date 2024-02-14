@@ -18,7 +18,13 @@
     </div>
     <div class="card-body p-1">
         <h6 class="card-title text-center mb-1">
-            <fa-icon [icon]="faUser"></fa-icon> {{member.aka}}
+            <span [class.is-online]="(presenceService.onlineUser$ | async)?.includes(member.userName)"
+                *ngIf="(presenceService.onlineUser$ | async)?.includes(member.userName)">
+                <fa-icon [icon]="faUser"></fa-icon> {{member.aka}}
+            </span>
+            <span *ngIf="!(presenceService.onlineUser$ | async)?.includes(member.userName)">
+                <fa-icon [icon]="faUser"></fa-icon> {{member.aka}}
+            </span>
         </h6>
         <p class="card-text text-muted text-center mb-0">{{member.city}}</p>
         <p class="card-text text-muted text-center mb-0">{{member.gender}} ({{member.age}})</p>
